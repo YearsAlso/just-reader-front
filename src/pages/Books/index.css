@@ -1,0 +1,98 @@
+.books-container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+.books-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.book-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.book-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+}
+
+.book-card .book-card-body {
+    padding: 1rem; 
+}
+
+.book-cover {
+    height: 18rem;
+    background-size: cover;
+    background-position: center; 
+}
+
+.book-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.book-description {
+    color: #718096;
+}
+
+.drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: slideIn 0.3s forwards;
+}
+
+.drawer-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.drawer-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.drawer-cover {
+    height: 18rem;
+    background-size: cover;
+    background-position: center;
+    margin-top: 1rem;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
