@@ -1,0 +1,33 @@
+image: node:16
+
+stages:
+  - build
+  - __test__
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+build:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - build/
+
+test:
+  stage: __test__
+  script:
+    - npm install
+    - npm run __test__
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying application..."
+    # 这里可以添加具体的部署脚本，例如使用rsync或scp将build目录上传到服务器
+  only:
+    - main

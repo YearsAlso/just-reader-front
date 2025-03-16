@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './style.css'; // 引入样式文件
 
-const LoginPages: React.FC = () => {
+const LoginPage: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -48,4 +48,4 @@ const LoginPages: React.FC = () => {
     );
 }
 
-export default LoginPages;
+export default LoginPage;
