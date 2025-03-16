@@ -1,14 +1,11 @@
 import {Book, Note, ReadingStats} from '../../repository/data';
 import {getMockLatestNotes, getMockReadingStats} from '../../mock/mock';
-import BookRepository from '../../repository/BooksRepository';
-
-const bookRepository = new BookRepository();
 
 export const getRecentBooks = async (): Promise<Book[]> => {
     // 使用 mock 数据
     // return getMockRecentBooks();
     // 真实数据逻辑
-    return bookRepository.findAll();
+    return [];
 };
 
 export const getLatestNotes = async (): Promise<Note[]> => {

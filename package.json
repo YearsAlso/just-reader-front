@@ -14,10 +14,12 @@
   "dependencies": {
     "@ant-design/icons": "^5.5.1",
     "@faker-js/faker": "^9.2.0",
-    "@reduxjs/toolkit": "^2.5.0", 
+    "@reduxjs/toolkit": "^2.5.0",
     "antd": "^5.21.6",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.5",
+    "immer": "^10.1.1",
+    "less": "^4.2.2",
     "localforage": "^1.10.0",
     "lodash-es": "^4.17.21",
     "match-sorter": "^7.0.0",
@@ -30,12 +32,13 @@
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
     "sort-by": "^1.2.0",
-    "zod": "3.24.0-canary.20241016T212913"
+    "zod": "3.24.0-canary.20241016T212913",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@ant-design/cssinjs": "^1.22.0",
     "@commitlint/cli": "^19.5.0",
-    "@commitlint/config-conventional": "^19.5.0", 
+    "@commitlint/config-conventional": "^19.5.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^8.14.0",
@@ -51,9 +54,10 @@
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "react-query": "^3.39.3",
+    "rolldown": "1.0.0-beta.4",
     "tailwindcss": "^3.4.15",
     "typescript": "^5.2.2",
-    "vite": "^5.3.1"
+    "vite": "^6.0.0"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [

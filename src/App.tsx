@@ -4,12 +4,13 @@ import ProtectedRoute from './components/ProtectedRoute/index.tsx'
 import Login from './pages/Login/index.tsx'
 import LayoutWrapper from './layout/index.tsx'
 import {useSelector} from 'react-redux'
-import InitConfigPage from './pages/Init/index.tsx'
 import ConnectionStatusPage from './pages/Result/ConnectionStatus/index.tsx'
-import {RootState} from "./redux/store.ts"; // 新增导入
+import {RootState} from "./redux/store.ts";
+import RegisterPage from './pages/Register'
 
 function App() {
     const initStatus = useSelector((state: RootState) => state.config.initStatus)
+    const token = localStorage.getItem("token");
 
     return (
         <Router>
@@ -17,26 +18,34 @@ function App() {
                 <Route
                     path="/"
                     element={
-                        initStatus !== 'inited' ? (
-                            <Navigate to="/init"/>
+                        token ? (
+                            initStatus !== 'inited' ? (
+                                <Navigate to="/login"/>
+                            ) : (
+                                <ProtectedRoute>
+                                    <LayoutWrapper/>
+                                </ProtectedRoute>
+                            )
                         ) : (
-                            <ProtectedRoute>
-                                <LayoutWrapper/>
-                            </ProtectedRoute>
+                            <Navigate to="/login"/>
                         )
                     }
                 />
                 <Route
                     path="/*"
                     element={
-                        <ProtectedRoute>
-                            <LayoutWrapper/>
-                        </ProtectedRoute>
+                        token ? (
+                            <ProtectedRoute>
+                                <LayoutWrapper/>
+                            </ProtectedRoute>
+                        ) : (
+                            <Navigate to="/login"/>
+                        )
                     }
                 />
                 <Route path="/login" element={<Login/>}/>
-                <Route path="/init" element={<InitConfigPage/>}/>
-                <Route path="/connection-status" element={<ConnectionStatusPage/>}/> {/* 新增路由 */}
+                <Route path="/register" element={<RegisterPage/>}/>
+                <Route path="/connection-status" element={<ConnectionStatusPage/>}/>
             </Routes>
         </Router>
     )
