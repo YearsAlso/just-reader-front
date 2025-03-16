@@ -19,10 +19,10 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "composite": true
   },
   "include": ["src",
     "src/__test__"
-  ],
-  "references": [{ "path": "./tsconfig.json" }]
+  ]
 }
