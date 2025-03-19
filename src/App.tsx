@@ -7,11 +7,12 @@ import ConnectionStatusPage from './pages/Result/ConnectionStatus/index.tsx'
 import RegisterPage from './pages/Register'
 
 function App() {
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('authToken')
+  const authenticated = localStorage.getItem('authenticated')
   const currentLocation = window.location.pathname
 
   const getElement = () => {
-    return token ? (
+    return token && authenticated === 'true' ? (
       <ProtectedRoute>
         <LayoutWrapper />
       </ProtectedRoute>

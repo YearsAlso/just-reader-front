@@ -4,9 +4,11 @@ import App from './App'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 import './global.css'
+import { setDomFontSize } from '@/utils/DomUtils'
 
 import { px2remTransformer, StyleProvider } from '@ant-design/cssinjs'
 
+setDomFontSize()
 const px2rem = px2remTransformer({
   rootValue: 16 // 32px = 1rem; @default 16
 })

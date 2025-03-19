@@ -1,0 +1,9 @@
+body {
+    font-size: 1rem; /* 使用 rem 单位 */
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 2rem; /* 示例：使用 rem 单位 */
+}
