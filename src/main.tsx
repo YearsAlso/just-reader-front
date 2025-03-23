@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
-import './global.css'
+import './global.less'
 import { setDomFontSize } from '@/utils/DomUtils'
 
 import { px2remTransformer, StyleProvider } from '@ant-design/cssinjs'
@@ -16,7 +16,12 @@ const px2rem = px2remTransformer({
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <StyleProvider transformers={[px2rem]}>
-      <ConfigProvider locale={zhCN} componentSize={'large'}>
+      <ConfigProvider locale={zhCN} componentSize={'large'} theme={{
+        token: {
+          colorPrimary: '#687864',
+          borderRadius: 10
+        }
+      }}>
         <App />
       </ConfigProvider>
     </StyleProvider>

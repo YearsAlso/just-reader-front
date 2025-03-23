@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react'
 import {getRecentBooks, getLatestNotes, getReadingStats} from './serve'
 import {Book, Note, ReadingStats} from '../../repository/data'
 import BookCard from './components/BookCard' // 引入 BookCard 组件
-import './index.css' // 引入自定义样式
+import './index.less' // 引入自定义样式
 import 'tailwindcss/tailwind.css' // 引入 Tailwind CSS 样式
 import {Typography} from 'antd'
 import {faker} from '@faker-js/faker'

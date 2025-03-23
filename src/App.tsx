@@ -1,5 +1,5 @@
 import { HashRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
-import './App.css'
+import './App.less'
 import ProtectedRoute from './components/ProtectedRoute/index.tsx'
 import Login from './pages/Login/index.tsx'
 import LayoutWrapper from './layout/index.tsx'
@@ -13,9 +13,13 @@ function App() {
 
   const getElement = () => {
     return token && authenticated === 'true' ? (
-      <ProtectedRoute>
-        <LayoutWrapper />
-      </ProtectedRoute>
+      currentLocation === '/register' || currentLocation === '/login' ? (
+        <Navigate to="/" />
+      ) : (
+        <ProtectedRoute>
+          <LayoutWrapper />
+        </ProtectedRoute>
+      )
     ) : currentLocation === '/register' ? (
       <Navigate to="/register" />
     ) : (
