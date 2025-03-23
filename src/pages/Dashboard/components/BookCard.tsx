@@ -1,6 +1,6 @@
 import React from 'react'
 import './BookCard.css'
-import {Book} from "../../../repository/data"; // 引入自定义样式
+import {Book} from "@/repository/data"; // 引入自定义样式
 
 
 const BookCard: React.FC<Book> = ({title, author, cover}) => {
