@@ -1,10 +1,8 @@
 import { HashRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import './App.less'
 import ProtectedRoute from './components/ProtectedRoute/index.tsx'
-import Login from './pages/Login/index.tsx'
+import Login from './pages/auth/index.tsx'
 import LayoutWrapper from './layout/index.tsx'
-import ConnectionStatusPage from './pages/Result/ConnectionStatus/index.tsx'
-import RegisterPage from './pages/Register'
 
 function App() {
   const token = localStorage.getItem('authToken')
@@ -32,8 +30,7 @@ function App() {
       <Routes>
         <Route path="/*" element={getElement()} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/connection-status" element={<ConnectionStatusPage />} />
+        <Route path="/register" element={<Login />} />
       </Routes>
     </Router>
   )

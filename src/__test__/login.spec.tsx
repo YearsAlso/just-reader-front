@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 import { render } from 'vitest-browser-react'
-import LoginPage from '../pages/Login'
+import LoginPage from '../pages/auth'
 
 test('renders name', async () => {
   // 修复：为LoginPage传递一个空对象作为props

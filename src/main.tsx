@@ -5,6 +5,9 @@ import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 import './global.less'
 import { setDomFontSize } from '@/utils/DomUtils'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+config.autoAddCss = false // 禁用自动添加CSS，避免重复引入
 
 import { px2remTransformer, StyleProvider } from '@ant-design/cssinjs'
 

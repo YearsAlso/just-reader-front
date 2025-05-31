@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复习中心 - AI-SQ3R智能阅读器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border-radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
+        .logo-icon {
+            background: var(--primary);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .badge {
+            background: var(--warning);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+        }
+        
+        .icon-btn {
+            background: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .icon-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 18px 0;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        
+        .tab:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+        
+        .tab.active {
+            color: var(--primary);
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 60%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .page-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title h1 {
+            font-size: 2.2rem;
+            color: var(--secondary);
+        }
+        
+        .page-title p {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+        
+        .review-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 25px;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        /* 待复习卡片 */
+        .pending-card {
+            grid-column: span 8;
+        }
+        
+        .review-list {
+            margin-top: 20px;
+        }
+        
+        .review-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            background: #f8f9fa;
+            margin-bottom: 15px;
+            transition: var(--transition);
+            border-left: 4px solid var(--accent);
+        }
+        
+        .review-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .review-item.urgent {
+            border-left-color: var(--warning);
+        }
+        
+        .review-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            margin-right: 15px;
+        }
+        
+        .review-info {
+            flex: 1;
+        }
+        
+        .review-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .review-meta {
+            display: flex;
+            color: #6c757d;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+        
+        .review-meta span {
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .review-meta i {
+            margin-right: 5px;
+        }
+        
+        .review-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn i {
+            font-size: 0.9rem;
+        }
+        
+        /* 闪卡复习区 */
+        .flashcard-section {
+            grid-column: span 4;
+        }
+        
+        .flashcard-container {
+            perspective: 1000px;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .flashcard-front,
+        .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .flashcard-front {
+            background: linear-gradient(135deg, #4361ee 0%, #3f37c9 100%);
+            color: white;
+        }
+        
+        .flashcard-back {
+            background: white;
+            color: var(--dark);
+            transform: rotateY(180deg);
+        }
+        
+        .card-category {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        
+        .card-question {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .card-hint {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: auto;
+        }
+        
+        .card-answer {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .card-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .difficulty-btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .easy {
+            background: rgba(76, 201, 240, 0.2);
+            color: #4cc9f0;
+        }
+        
+        .easy:hover {
+            background: rgba(76, 201, 240, 0.3);
+        }
+        
+        .medium {
+            background: rgba(114, 9, 183, 0.2);
+            color: #7209b7;
+        }
+        
+        .medium:hover {
+            background: rgba(114, 9, 183, 0.3);
+        }
+        
+        .hard {
+            background: rgba(247, 37, 133, 0.2);
+            color: #f72585;
+        }
+        
+        .hard:hover {
+            background: rgba(247, 37, 133, 0.3);
+        }
+        
+        /* 复习进度区 */
+        .progress-card {
+            grid-column: span 4;
+        }
+        
+        .progress-container {
+            margin: 25px 0;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 5px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value.completed {
+            color: var(--success);
+        }
+        
+        .stat-value.pending {
+            color: var(--warning);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        /* 知识图谱区 */
+        .knowledge-card {
+            grid-column: span 8;
+        }
+        
+        .knowledge-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .knowledge-filter {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            background: #f8f9fa;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .knowledge-item {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            transition: var(--transition);
+            border: 2px solid #e9ecef;
+        }
+        
+        .knowledge-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        
+        .knowledge-item.mastered {
+            border-color: var(--success);
+        }
+        
+        .knowledge-item.weak {
+            border-color: var(--warning);
+        }
+        
+        .knowledge-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .knowledge-title i {
+            color: var(--success);
+        }
+        
+        .knowledge-title.weak i {
+            color: var(--warning);
+        }
+        
+        .knowledge-meta {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        
+        .knowledge-progress {
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            margin-bottom: 10px;
+        }
+        
+        .knowledge-progress-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+        
+        .mastered .knowledge-progress-fill {
+            background: var(--success);
+            width: 90%;
+        }
+        
+        .reviewed .knowledge-progress-fill {
+            background: var(--accent);
+            width: 65%;
+        }
+        
+        .weak .knowledge-progress-fill {
+            background: var(--warning);
+            width: 35%;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .pending-card,
+            .flashcard-section,
+            .progress-card,
+            .knowledge-card {
+                grid-column: span 12;
+            }
+            
+            .flashcard-container {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h1>AI-SQ3R阅读器</h1>
+            </div>
+            <div class="user-actions">
+                <div class="icon-btn">
+                    <i class="fas fa-medal"></i>
+                    <div class="badge">3</div>
+                </div>
+                <div class="icon-btn">
+                    <i class="fas fa-bell"></i>
+                    <div class="badge">5</div>
+                </div>
+                <div class="icon-btn">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </header>
+        
+        <div class="nav-tabs">
+            <div class="tab">我的书架</div>
+            <div class="tab">阅读报告</div>
+            <div class="tab active">复习中心</div>
+            <div class="tab">勋章墙</div>
+            <div class="tab">学习挑战</div>
+        </div>
+        
+        <div class="page-title">
+            <div>
+                <h1>复习中心</h1>
+                <p>基于艾宾浩斯记忆曲线优化的复习计划</p>
+            </div>
+            <button class="btn">
+                <i class="fas fa-plus"></i> 创建新复习
+            </button>
+        </div>
+        
+        <div class="review-container">
+            <!-- 待复习任务区 -->
+            <div class="card pending-card">
+                <div class="card-header">
+                    <h2 class="card-title">待复习任务</h2>
+                    <div class="btn btn-outline">
+                        <i class="fas fa-filter"></i> 筛选
+                    </div>
+                </div>
+                
+                <div class="review-list">
+                    <div class="review-item urgent">
+                        <div class="review-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="review-info">
+                            <div class="review-title">记忆系统与信息处理</div>
+                            <div class="review-meta">
+                                <span><i class="fas fa-book"></i> 认知心理学导论 - 第三章</span>
+                                <span><i class="fas fa-clock"></i> 到期时间: 今天 18:00</span>
+                                <span><i class="fas fa-sticky-note"></i> 12张闪卡</span>
+                            </div>
+                        </div>
+                        <div class="review-actions">
+                            <button class="btn">
+                                <i class="fas fa-play"></i> 开始复习
+                            </button>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="review-item">
+                        <div class="review-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="review-info">
+                            <div class="review-title">问题解决与决策</div>
+                            <div class="review-meta">
+                                <span><i class="fas fa-book"></i> 认知心理学导论 - 第五章</span>
+                                <span><i class="fas fa-clock"></i> 到期时间: 明天 10:00</span>
+                                <span><i class="fas fa-sticky-note"></i> 8张闪卡</span>
+                            </div>
+                        </div>
+                        <div class="review-actions">
+                            <button class="btn">
+                                <i class="fas fa-play"></i> 开始复习
+                            </button>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="review-item">
+                        <div class="review-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div class="review-info">
+                            <div class="review-title">语言与认知</div>
+                            <div class="review-meta">
+                                <span><i class="fas fa-book"></i> 认知心理学导论 - 第七章</span>
+                                <span><i class="fas fa-clock"></i> 到期时间: 2天后</span>
+                                <span><i class="fas fa-sticky-note"></i> 10张闪卡</span>
+                            </div>
+                        </div>
+                        <div class="review-actions">
+                            <button class="btn">
+                                <i class="fas fa-play"></i> 开始复习
+                            </button>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 闪卡复习区 -->
+            <div class="card flashcard-section">
+                <div class="card-header">
+                    <h2 class="card-title">闪卡复习</h2>
+                    <div>
+                        <span>12/24</span>
+                    </div>
+                </div>
+                
+                <div class="flashcard-container">
+                    <div class="flashcard">
+                        <div class="flashcard-front">
+                            <div class="card-category">认知心理学 - 第三章</div>
+                            <div class="card-question">工作记忆的主要组成部分有哪些？</div>
+                            <div class="card-hint">点击卡片查看答案</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="card-answer">
+                                根据Baddeley的工作记忆模型，主要包含三个部分：<br><br>
+                                1. 中央执行系统：负责注意控制和协调子系统<br>
+                                2. 语音回路：处理言语信息<br>
+                                3. 视觉空间画板：处理视觉和空间信息
+                            </div>
+                            <div class="card-tags">
+                                <div class="tag">工作记忆</div>
+                                <div class="tag">认知模型</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-actions">
+                    <div class="difficulty-btn easy">
+                        <i class="fas fa-smile"></i> 简单
+                    </div>
+                    <div class="difficulty-btn medium">
+                        <i class="fas fa-meh"></i> 中等
+                    </div>
+                    <div class="difficulty-btn hard">
+                        <i class="fas fa-frown"></i> 困难
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 复习进度区 -->
+            <div class="card progress-card">
+                <div class="card-header">
+                    <h2 class="card-title">复习进度</h2>
+                    <div>
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>整体完成度</span>
+                        <span>65%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>记忆强度</span>
+                        <span>78%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%; background: #4cc9f0;"></div>
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value completed">42</div>
+                        <div class="stat-label">已完成闪卡</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value pending">18</div>
+                        <div class="stat-label">待复习闪卡</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">85%</div>
+                        <div class="stat-label">平均准确率</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">7</div>
+                        <div class="stat-label">连胜天数</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 知识点巩固区 -->
+            <div class="card knowledge-card">
+                <div class="knowledge-header">
+                    <h2 class="card-title">知识点巩固</h2>
+                    <div class="knowledge-filter">
+                        <button class="filter-btn active">全部</button>
+                        <button class="filter-btn">已掌握</button>
+                        <button class="filter-btn">待加强</button>
+                    </div>
+                </div>
+                
+                <div class="knowledge-grid">
+                    <div class="knowledge-item mastered">
+                        <div class="knowledge-title">
+                            <i class="fas fa-check-circle"></i>
+                            <span>工作记忆模型</span>
+                        </div>
+                        <div class="knowledge-meta">
+                            <span>认知心理学导论 - 第三章</span>
+                        </div>
+                        <div class="knowledge-progress">
+                            <div class="knowledge-progress-fill"></div>
+                        </div>
+                        <div class="knowledge-meta">
+                            最后复习: 2天前
+                        </div>
+                    </div>
+                    
+                    <div class="knowledge-item reviewed">
+                        <div class="knowledge-title">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>记忆巩固过程</span>
+                        </div>
+                        <div class="knowledge-meta">
+                            <span>认知心理学导论 - 第三章</span>
+                        </div>
+                        <div class="knowledge-progress">
+                            <div class="knowledge-progress-fill"></div>
+                        </div>
+                        <div class="knowledge-meta">
+                            最后复习: 3天前
+                        </div>
+                    </div>
+                    
+                    <div class="knowledge-item weak">
+                        <div class="knowledge-title weak">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>遗忘曲线理论</span>
+                        </div>
+                        <div class="knowledge-meta">
+                            <span>认知心理学导论 - 第四章</span>
+                        </div>
+                        <div class="knowledge-progress">
+                            <div class="knowledge-progress-fill"></div>
+                        </div>
+                        <div class="knowledge-meta">
+                            最后复习: 5天前
+                        </div>
+                    </div>
+                    
+                    <div class="knowledge-item mastered">
+                        <div class="knowledge-title">
+                            <i class="fas fa-check-circle"></i>
+                            <span>感觉记忆特征</span>
+                        </div>
+                        <div class="knowledge-meta">
+                            <span>认知心理学导论 - 第三章</span>
+                        </div>
+                        <div class="knowledge-progress">
+                            <div class="knowledge-progress-fill"></div>
+                        </div>
+                        <div class="knowledge-meta">
+                            最后复习: 1天前
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 闪卡翻转功能
+        const flashcard = document.querySelector('.flashcard');
+        if(flashcard) {
+            flashcard.addEventListener('click', function() {
+                this.classList.toggle('flipped');
+            });
+        }
+        
+        // 难度按钮交互
+        const difficultyBtns = document.querySelectorAll('.difficulty-btn');
+        difficultyBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 移除其他按钮的active状态
+                difficultyBtns.forEach(b => b.classList.remove('active'));
+                
+                // 添加当前按钮active状态
+                this.classList.add('active');
+                
+                // 模拟翻到下一张卡片
+                setTimeout(() => {
+                    flashcard.classList.remove('flipped');
+                    
+                    // 更新问题内容（实际应用中会从数据库获取新问题）
+                    setTimeout(() => {
+                        document.querySelector('.card-question').textContent = "什么是记忆巩固过程？";
+                        document.querySelector('.card-answer').innerHTML = "记忆巩固是指将短期记忆转化为长期记忆的神经过程。它涉及：<br><br>1. 突触巩固：发生在学习后的最初几小时<br>2. 系统巩固：将记忆从海马体转移到新皮质，可能需要数周或数月";
+                    }, 300);
+                }, 800);
+            });
+        });
+        
+        // 筛选按钮交互
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
