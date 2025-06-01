@@ -23,7 +23,7 @@ const LayoutWrapper = () => {
           <div className="logo-icon">
             <i className="fas fa-brain"></i>
           </div>
-          <h1>AI-SQ3R阅读器</h1>
+          <h1>Just Reader</h1>
         </div>
         <div className="user-actions">
           <div className="icon-btn">
@@ -93,7 +93,7 @@ const LayoutWrapper = () => {
         </div>
       </div>
       <Routes>
-        <Route path="/" element={<BooksPage />} />
+        <Route index element={<BooksPage />} />
         <Route path="/books" element={<BooksPage />} />
         <Route path="/reading-report" element={<ReadingReport />} />
         <Route path="/review-center" element={<ReviewCenter />} />

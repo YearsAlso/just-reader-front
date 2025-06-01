@@ -174,6 +174,16 @@ const Challenge: React.FC = () => {
 
   return (
     <>
+      <div className="page-header">
+        <div>
+          <h1>学习挑战赛</h1>
+          <p>参与挑战活动，赢取专属奖励，提升你的阅读效率与知识积累</p>
+        </div>
+        <button className="btn">
+          <i className="fas fa-plus"></i> 创建挑战
+        </button>
+      </div>
+
       <div className="challenge-categories">
         {[
           { key: 'all', icon: 'fas fa-fire', label: '全部挑战' },
