@@ -30,7 +30,7 @@ interface Level {
 }
 
 const MedalPage: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<string>('all') 
+  const [activeCategory, setActiveCategory] = useState<string>('all')
 
   const medals: Medal[] = [
     {
@@ -168,14 +168,6 @@ const MedalPage: React.FC = () => {
     { key: 'rare', label: '稀有勋章', icon: 'fas fa-gem' }
   ]
 
-  const tabs = [
-    { key: 'bookshelf', label: '我的书架' },
-    { key: 'report', label: '阅读报告' },
-    { key: 'review', label: '复习中心' },
-    { key: 'medal', label: '勋章墙' },
-    { key: 'challenge', label: '学习挑战' }
-  ]
-
   const filteredMedals = medals.filter((medal) => {
     if (activeCategory === 'all') return true
     return medal.category === activeCategory
@@ -190,7 +182,7 @@ const MedalPage: React.FC = () => {
 
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category)
-  } 
+  }
 
   const handleStartReading = () => {
     // 实际应用中会跳转到阅读页面
@@ -198,7 +190,7 @@ const MedalPage: React.FC = () => {
   }
 
   return (
-    <>
+    <div className="medal-page-content">
       <div className="page-title">
         <h1>我的成就殿堂</h1>
         <p>通过SQ3R阅读法积累知识，解锁更多荣誉勋章</p>
@@ -337,7 +329,7 @@ const MedalPage: React.FC = () => {
           <i className="fas fa-book-open"></i> 立即开始阅读
         </button>
       </div>
-    </>
+    </div>
   )
 }
 

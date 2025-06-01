@@ -1,0 +1,291 @@
+
+.book-overview-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+
+
+  .card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 25px;
+  }
+
+  /* 书籍基本信息卡片 */
+
+  .book-info-card {
+    position: relative;
+    text-align: center;
+  }
+
+  .book-cover {
+    width: 200px;
+    height: 280px;
+    margin: 0 auto 25px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: white;
+  }
+
+  .book-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--secondary);
+  }
+
+  .book-author {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 20px;
+  }
+
+  .book-meta {
+    display: flex;
+    justify-content: space-around;
+    margin: 25px 0;
+  }
+
+  .meta-item {
+    text-align: center;
+  }
+
+  .meta-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .meta-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+
+  .action-btn {
+    display: block;
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .action-btn:hover {
+    background: var(--secondary);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+  }
+
+  .action-btn.outline {
+    background: white;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+  }
+
+  /* 书籍内容卡片 */
+
+  .book-content-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(67, 97, 238, 0.1);
+    color: var(--primary);
+  }
+
+  /* 目录树 */
+
+  .toc-container {
+    border: 1px solid #e9ecef;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .toc-list {
+    list-style: none;
+  }
+
+  .toc-item {
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+  }
+
+  .toc-item:hover {
+    background: #f8f9fa;
+  }
+
+  .toc-item.active {
+    background: rgba(67, 97, 238, 0.1);
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  .toc-icon {
+    margin-right: 10px;
+    color: #6c757d;
+  }
+
+  .toc-children {
+    list-style: none;
+    padding-left: 25px;
+    margin-top: 8px;
+  }
+
+  /* 关键术语 */
+
+  .terms-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .term-card {
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+    cursor: pointer;
+  }
+
+  .term-card:hover {
+    background: rgba(67, 97, 238, 0.1);
+    transform: translateY(-3px);
+  }
+
+  .term-badge {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: white;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .term-text {
+    font-weight: 600;
+  }
+
+  /* 知识图谱预览 */
+
+  .graph-container {
+    height: 300px;
+    background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 100%);
+    border-radius: var(--border-radius);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .graph-node {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .graph-node:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+  }
+
+  .graph-node.main {
+    width: 100px;
+    height: 100px;
+    background: var(--primary);
+    color: white;
+    z-index: 5;
+  }
+
+  .graph-line {
+    position: absolute;
+    height: 3px;
+    background: var(--accent);
+    transform-origin: left;
+  }
+
+  .graph-preview-text {
+    text-align: center;
+    margin-top: 15px;
+    color: #6c757d;
+  }
+
+  .graph-preview-text a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  /* 响应式设计 */
+  @media (max-width: 992px) {
+    .book-overview-container {
+      grid-template-columns: 1fr;
+    }
+
+    .book-cover {
+      width: 160px;
+      height: 220px;
+    }
+  }
+}

@@ -1,10 +1,10 @@
 import React from 'react'
-import './index.css' // 引入样式文件
+import './styles.less' // 引入样式文件
 import { Button } from 'antd'
 
 const BooksPage: React.FC = () => {
   return (
-    <div className="page-content">
+    <div className="books-page-content">
       <div className="main-content">
         {/* SQ3R步骤导航 */}
         <div className="card">

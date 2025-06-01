@@ -173,7 +173,7 @@ const Challenge: React.FC = () => {
   )
 
   return (
-    <>
+    <div className="challenge-page-content">
       <div className="page-header">
         <div>
           <h1>学习挑战赛</h1>
@@ -353,7 +353,7 @@ const Challenge: React.FC = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -8,6 +8,7 @@ import MedalPage from '@/pages/medal'
 import ReviewCenter from '@/pages/review'
 import ReadingReport from '@/pages/reading'
 import AccountPage from '@/pages/account'
+import Library from '@/pages/library'
 
 const LayoutWrapper = () => {
   const [activeTab, setActiveTab] = useState('我的书架')
@@ -50,7 +51,7 @@ const LayoutWrapper = () => {
           className={`tab ${activeTab === '我的书架' ? 'active' : ''}`}
           onClick={() => {
             handleTabClick('我的书架')
-            navigate('/books')
+            navigate('/library')
           }}
         >
           我的书架
@@ -93,8 +94,9 @@ const LayoutWrapper = () => {
         </div>
       </div>
       <Routes>
-        <Route index element={<BooksPage />} />
+        <Route index element={<Library />} />
         <Route path="/books" element={<BooksPage />} />
+        <Route path="/library" element={<Library />} />
         <Route path="/reading-report" element={<ReadingReport />} />
         <Route path="/review-center" element={<ReviewCenter />} />
         <Route path="/medal-wall" element={<MedalPage />} />

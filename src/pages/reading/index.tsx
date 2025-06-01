@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './styles.less'
 
 interface StatItem {
@@ -22,8 +22,6 @@ interface ReviewItem {
 }
 
 const ReadingReport: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('阅读报告')
-
   const overviewStats: StatItem[] = [
     { value: '12', label: '阅读天数' },
     { value: '28.5', label: '阅读时长(小时)' },
@@ -78,10 +76,6 @@ const ReadingReport: React.FC = () => {
 
   const heatmapData = generateHeatmapData()
 
-  const handleTabClick = (tabName: string) => {
-    setActiveTab(tabName)
-  }
-
   const handleDownloadReport = () => {
     console.log('下载报告')
   }
@@ -95,7 +89,7 @@ const ReadingReport: React.FC = () => {
   }
 
   return (
-    <>
+    <div className="reading-report-page">
       <div className="page-title">
         <h1>您的阅读报告</h1>
         <p>以下是您过去30天的阅读数据统计和知识掌握情况</p>
@@ -317,7 +311,7 @@ const ReadingReport: React.FC = () => {
           <i className="fas fa-download"></i> 下载完整报告
         </button>
       </div>
-    </>
+    </div>
   )
 }
 

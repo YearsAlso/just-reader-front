@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import './styles.less'
+
 
 interface ReviewItem {
   id: string
@@ -153,7 +155,7 @@ const ReviewCenter: React.FC = () => {
   const currentCard = flashCards[currentCardIndex]
 
   return (
-    <>
+    <div className="review-page-content">
       <div className="page-title">
         <div>
           <h1>复习中心</h1>
@@ -383,7 +385,7 @@ const ReviewCenter: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import './index.less'
+import React, { useState } from 'react'
+import './styles.less'
 
 interface Book {
   id: number
@@ -106,7 +106,7 @@ const Library: React.FC = () => {
     }
   ]
 
-  const [books, setBooks] = useState<Book[]>(initialBooks)
+  const [books, _] = useState<Book[]>(initialBooks)
   const [displayedBooks, setDisplayedBooks] = useState<Book[]>(initialBooks)
   const [searchTerm, setSearchTerm] = useState<string>('')
   const [currentFilter, setCurrentFilter] = useState<string>('all')
@@ -191,7 +191,34 @@ const Library: React.FC = () => {
   }
 
   return (
-    <>
+    <div className={'library-page'}>
+      <div className="header-actions">
+        <div className="search-container">
+          <div className="search-box">
+            <i className="fas fa-search"></i>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="搜索书名、作者或关键词..."
+              onChange={handleSearch}
+            />
+          </div>
+          <div className="filter-dropdown">
+            <select id="filterSelect" onChange={handleFilter}>
+              <option value="all">全部图书</option>
+              <option value="recent">最近添加</option>
+              <option value="reading">阅读中</option>
+              <option value="completed">已完成</option>
+              <option value="difficulty">按难度排序</option>
+            </select>
+            <i className="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <button className="import-btn" onClick={handleImport}>
+          <i className="fas fa-plus-circle"></i> 导入新书
+        </button>
+      </div>
+
       <div className="books-grid" id="booksGrid">
         {displayedBooks.length === 0 ? (
           <div className="no-results">
@@ -311,7 +338,7 @@ const Library: React.FC = () => {
           <i className="fas fa-chevron-right"></i>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -30,7 +30,7 @@ const AccountPage: React.FC = () => {
   }
 
   return (
-    <>
+    <div className="account-page-content">
       {/* 个人信息卡片 */}
       <div className="card profile-card">
         <div className="profile-header">
@@ -284,7 +284,7 @@ const AccountPage: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
