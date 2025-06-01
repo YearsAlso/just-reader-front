@@ -1,82 +1,3 @@
-.page-content {
-  display: flex;
-  gap: 25px;
-}
-
-.badge {
-  background: var(--warning);
-  color: white;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  position: absolute;
-  top: -8px;
-  right: -8px;
-}
-
-.icon-btn {
-  background: white;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--dark);
-  font-size: 1.2rem;
-  box-shadow: var(--shadow);
-  cursor: pointer;
-  position: relative;
-  transition: var(--transition);
-}
-
-.icon-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-}
-
-.nav-tabs {
-  display: flex;
-  background: white;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  margin-bottom: 30px;
-}
-
-.tab {
-  flex: 1;
-  text-align: center;
-  padding: 18px 0;
-  cursor: pointer;
-  position: relative;
-  transition: var(--transition);
-  font-weight: 600;
-}
-
-.tab:hover {
-  background: rgba(67, 97, 238, 0.05);
-}
-
-.tab.active {
-  color: var(--primary);
-}
-
-.tab.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 20%;
-  width: 60%;
-  height: 3px;
-  background: var(--primary);
-  border-radius: 3px;
-}
-
 .page-title {
   display: flex;
   justify-content: space-between;
@@ -327,6 +248,11 @@
   transition: var(--transition);
 }
 
+.difficulty-btn.active {
+  opacity: 0.8;
+  transform: scale(0.95);
+}
+
 .easy {
   background: rgba(76, 201, 240, 0.2);
   color: #4cc9f0;
@@ -417,7 +343,7 @@
   color: #6c757d;
 }
 
-/* 知识图谱区 */
+/* 知识点巩固区 */
 .knowledge-card {
   grid-column: span 8;
 }
@@ -470,6 +396,10 @@
 
 .knowledge-item.mastered {
   border-color: var(--success);
+}
+
+.knowledge-item.reviewed {
+  border-color: var(--primary);
 }
 
 .knowledge-item.weak {

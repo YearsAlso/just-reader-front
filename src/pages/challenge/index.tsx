@@ -173,7 +173,7 @@ const Challenge: React.FC = () => {
   )
 
   return (
-    <div className="page-content challenge-page">
+    <>
       <div className="challenge-categories">
         {[
           { key: 'all', icon: 'fas fa-fire', label: '全部挑战' },
@@ -343,7 +343,7 @@ const Challenge: React.FC = () => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

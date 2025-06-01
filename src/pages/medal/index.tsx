@@ -203,7 +203,7 @@ const MedalPage: React.FC = () => {
   }
 
   return (
-    <div className="page-content medal-page">
+    <>
       <div className="page-title">
         <h1>我的成就殿堂</h1>
         <p>通过SQ3R阅读法积累知识，解锁更多荣誉勋章</p>
@@ -342,7 +342,7 @@ const MedalPage: React.FC = () => {
           <i className="fas fa-book-open"></i> 立即开始阅读
         </button>
       </div>
-    </div>
+    </>
   )
 }
 

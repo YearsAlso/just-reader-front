@@ -1,35 +1,35 @@
-import React, { useState } from 'react';
-import './styles.less';
+import React, { useState } from 'react'
+import './styles.less'
 
 interface StatItem {
-  value: string;
-  label: string;
+  value: string
+  label: string
 }
 
 interface ChartBar {
-  label: string;
-  height: number;
-  color: string;
+  label: string
+  height: number
+  color: string
 }
 
 interface ReviewItem {
-  id: string;
-  title: string;
-  cardCount: number;
-  estimatedTime: number;
-  status: 'completed' | 'pending';
-  icon: string;
+  id: string
+  title: string
+  cardCount: number
+  estimatedTime: number
+  status: 'completed' | 'pending'
+  icon: string
 }
 
 const ReadingReport: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('阅读报告');
+  const [activeTab, setActiveTab] = useState('阅读报告')
 
   const overviewStats: StatItem[] = [
     { value: '12', label: '阅读天数' },
     { value: '28.5', label: '阅读时长(小时)' },
     { value: '86%', label: '理解度' },
     { value: '74%', label: '知识留存率' }
-  ];
+  ]
 
   const chartData: ChartBar[] = [
     { label: '周一', height: 40, color: '#4361ee' },
@@ -39,7 +39,7 @@ const ReadingReport: React.FC = () => {
     { label: '周五', height: 50, color: '#4361ee' },
     { label: '周六', height: 65, color: '#4895ef' },
     { label: '周日', height: 45, color: '#4361ee' }
-  ];
+  ]
 
   const reviewItems: ReviewItem[] = [
     {
@@ -66,35 +66,36 @@ const ReadingReport: React.FC = () => {
       status: 'pending',
       icon: 'fas fa-language'
     }
-  ];
+  ]
 
   const generateHeatmapData = () => {
-    const levels = [1, 2, 3, 4];
-    return Array.from({ length: 40 }, () => 
-      levels[Math.floor(Math.random() * levels.length)]
-    );
-  };
+    const levels = [1, 2, 3, 4]
+    return Array.from(
+      { length: 40 },
+      () => levels[Math.floor(Math.random() * levels.length)]
+    )
+  }
 
-  const heatmapData = generateHeatmapData();
+  const heatmapData = generateHeatmapData()
 
   const handleTabClick = (tabName: string) => {
-    setActiveTab(tabName);
-  };
+    setActiveTab(tabName)
+  }
 
   const handleDownloadReport = () => {
-    console.log('下载报告');
-  };
+    console.log('下载报告')
+  }
 
   const handleAddPlan = () => {
-    console.log('添加计划');
-  };
+    console.log('添加计划')
+  }
 
   const handleViewFullGraph = () => {
-    console.log('查看完整图谱');
-  };
+    console.log('查看完整图谱')
+  }
 
   return (
-    <div className="page-content"> 
+    <>
       <div className="page-title">
         <h1>您的阅读报告</h1>
         <p>以下是您过去30天的阅读数据统计和知识掌握情况</p>
@@ -207,7 +208,8 @@ const ReadingReport: React.FC = () => {
                       <i className="fas fa-book"></i> {item.cardCount}张闪卡
                     </span>
                     <span>
-                      <i className="fas fa-clock"></i> 预计{item.estimatedTime}分钟
+                      <i className="fas fa-clock"></i> 预计{item.estimatedTime}
+                      分钟
                     </span>
                   </div>
                 </div>
@@ -250,58 +252,73 @@ const ReadingReport: React.FC = () => {
             <div className="graph-node" style={{ top: '250px', left: '450px' }}>
               程序性记忆
             </div>
-            
+
             {/* 连接线 */}
-            <div className="graph-line" style={{
-              width: '100px',
-              top: '110px',
-              left: '160px',
-              transform: 'rotate(30deg)'
-            }}></div>
-            <div className="graph-line" style={{
-              width: '100px',
-              top: '110px',
-              left: '160px',
-              transform: 'rotate(-30deg)'
-            }}></div>
-            <div className="graph-line" style={{
-              width: '80px',
-              top: '190px',
-              left: '120px',
-              transform: 'rotate(60deg)'
-            }}></div>
-            <div className="graph-line" style={{
-              width: '80px',
-              top: '190px',
-              left: '120px',
-              transform: 'rotate(-60deg)'
-            }}></div>
-            <div className="graph-line" style={{
-              width: '80px',
-              top: '190px',
-              left: '320px',
-              transform: 'rotate(60deg)'
-            }}></div>
-            <div className="graph-line" style={{
-              width: '80px',
-              top: '190px',
-              left: '320px',
-              transform: 'rotate(-60deg)'
-            }}></div>
+            <div
+              className="graph-line"
+              style={{
+                width: '100px',
+                top: '110px',
+                left: '160px',
+                transform: 'rotate(30deg)'
+              }}
+            ></div>
+            <div
+              className="graph-line"
+              style={{
+                width: '100px',
+                top: '110px',
+                left: '160px',
+                transform: 'rotate(-30deg)'
+              }}
+            ></div>
+            <div
+              className="graph-line"
+              style={{
+                width: '80px',
+                top: '190px',
+                left: '120px',
+                transform: 'rotate(60deg)'
+              }}
+            ></div>
+            <div
+              className="graph-line"
+              style={{
+                width: '80px',
+                top: '190px',
+                left: '120px',
+                transform: 'rotate(-60deg)'
+              }}
+            ></div>
+            <div
+              className="graph-line"
+              style={{
+                width: '80px',
+                top: '190px',
+                left: '320px',
+                transform: 'rotate(60deg)'
+              }}
+            ></div>
+            <div
+              className="graph-line"
+              style={{
+                width: '80px',
+                top: '190px',
+                left: '320px',
+                transform: 'rotate(-60deg)'
+              }}
+            ></div>
           </div>
         </div>
       </div>
 
       <div className="text-center">
-        <button 
-          className="btn download-btn"
-          onClick={handleDownloadReport}
-        >
+        <button className="btn download-btn" onClick={handleDownloadReport}>
           <i className="fas fa-download"></i> 下载完整报告
         </button>
       </div>
-    </div>
-  );
-};
+    </>
+  )
+}
 
-export default ReadingReport;
+export default ReadingReport

@@ -1,40 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 interface ReviewItem {
-  id: string;
-  title: string;
-  book: string;
-  chapter: string;
-  dueTime: string;
-  cardCount: number;
-  isUrgent: boolean;
-  icon: string;
+  id: string
+  title: string
+  book: string
+  chapter: string
+  dueTime: string
+  cardCount: number
+  isUrgent: boolean
+  icon: string
 }
 
 interface FlashCard {
-  id: string;
-  category: string;
-  question: string;
-  answer: string;
-  tags: string[];
-  hint: string;
+  id: string
+  category: string
+  question: string
+  answer: string
+  tags: string[]
+  hint: string
 }
 
 interface KnowledgeItem {
-  id: string;
-  title: string;
-  book: string;
-  chapter: string;
-  status: 'mastered' | 'reviewed' | 'weak';
-  progress: number;
-  lastReview: string;
+  id: string
+  title: string
+  book: string
+  chapter: string
+  status: 'mastered' | 'reviewed' | 'weak'
+  progress: number
+  lastReview: string
 }
 
 const ReviewCenter: React.FC = () => {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const [activeFilter, setActiveFilter] = useState('全部');
-  const [activeDifficulty, setActiveDifficulty] = useState<string | null>(null);
+  const [isFlipped, setIsFlipped] = useState(false)
+  const [currentCardIndex, setCurrentCardIndex] = useState(0)
+  const [activeFilter, setActiveFilter] = useState('全部')
+  const [activeDifficulty, setActiveDifficulty] = useState<string | null>(null)
 
   const reviewItems: ReviewItem[] = [
     {
@@ -67,14 +67,15 @@ const ReviewCenter: React.FC = () => {
       isUrgent: false,
       icon: 'fas fa-language'
     }
-  ];
+  ]
 
   const flashCards: FlashCard[] = [
     {
       id: '1',
       category: '认知心理学 - 第三章',
       question: '工作记忆的主要组成部分有哪些？',
-      answer: '根据Baddeley的工作记忆模型，主要包含三个部分：<br><br>1. 中央执行系统：负责注意控制和协调子系统<br>2. 语音回路：处理言语信息<br>3. 视觉空间画板：处理视觉和空间信息',
+      answer:
+        '根据Baddeley的工作记忆模型，主要包含三个部分：<br><br>1. 中央执行系统：负责注意控制和协调子系统<br>2. 语音回路：处理言语信息<br>3. 视觉空间画板：处理视觉和空间信息',
       tags: ['工作记忆', '认知模型'],
       hint: '点击卡片查看答案'
     },
@@ -82,11 +83,12 @@ const ReviewCenter: React.FC = () => {
       id: '2',
       category: '认知心理学 - 第三章',
       question: '什么是记忆巩固过程？',
-      answer: '记忆巩固是指将短期记忆转化为长期记忆的神经过程。它涉及：<br><br>1. 突触巩固：发生在学习后的最初几小时<br>2. 系统巩固：将记忆从海马体转移到新皮质，可能需要数周或数月',
+      answer:
+        '记忆巩固是指将短期记忆转化为长期记忆的神经过程。它涉及：<br><br>1. 突触巩固：发生在学习后的最初几小时<br>2. 系统巩固：将记忆从海马体转移到新皮质，可能需要数周或数月',
       tags: ['记忆巩固', '神经过程'],
       hint: '点击卡片查看答案'
     }
-  ];
+  ]
 
   const knowledgeItems: KnowledgeItem[] = [
     {
@@ -125,34 +127,33 @@ const ReviewCenter: React.FC = () => {
       progress: 90,
       lastReview: '1天前'
     }
-  ];
+  ]
 
   const handleFlashCardClick = () => {
-    setIsFlipped(!isFlipped);
-  };
+    setIsFlipped(!isFlipped)
+  }
 
   const handleDifficultyClick = (difficulty: string) => {
-    setActiveDifficulty(difficulty);
-    
+    setActiveDifficulty(difficulty)
+
     setTimeout(() => {
-      setIsFlipped(false);
-      setActiveDifficulty(null);
-      
+      setIsFlipped(false)
+      setActiveDifficulty(null)
+
       setTimeout(() => {
-        setCurrentCardIndex((prev) => (prev + 1) % flashCards.length);
-      }, 300);
-    }, 800);
-  };
+        setCurrentCardIndex((prev) => (prev + 1) % flashCards.length)
+      }, 300)
+    }, 800)
+  }
 
   const handleFilterClick = (filter: string) => {
-    setActiveFilter(filter);
-  };
+    setActiveFilter(filter)
+  }
 
-  const currentCard = flashCards[currentCardIndex];
+  const currentCard = flashCards[currentCardIndex]
 
   return (
-    <div className="page-content"> 
-
+    <>
       <div className="page-title">
         <div>
           <h1>复习中心</h1>
@@ -186,13 +187,15 @@ const ReviewCenter: React.FC = () => {
                   <div className="review-title">{item.title}</div>
                   <div className="review-meta">
                     <span>
-                      <i className="fas fa-book"></i> {item.book} - {item.chapter}
+                      <i className="fas fa-book"></i> {item.book} -{' '}
+                      {item.chapter}
                     </span>
                     <span>
                       <i className="fas fa-clock"></i> 到期时间: {item.dueTime}
                     </span>
                     <span>
-                      <i className="fas fa-sticky-note"></i> {item.cardCount}张闪卡
+                      <i className="fas fa-sticky-note"></i> {item.cardCount}
+                      张闪卡
                     </span>
                   </div>
                 </div>
@@ -214,7 +217,9 @@ const ReviewCenter: React.FC = () => {
           <div className="card-header">
             <h2 className="card-title">闪卡复习</h2>
             <div>
-              <span>{currentCardIndex + 1}/{flashCards.length}</span>
+              <span>
+                {currentCardIndex + 1}/{flashCards.length}
+              </span>
             </div>
           </div>
 
@@ -345,10 +350,7 @@ const ReviewCenter: React.FC = () => {
 
           <div className="knowledge-grid">
             {knowledgeItems.map((item) => (
-              <div
-                key={item.id}
-                className={`knowledge-item ${item.status}`}
-              >
+              <div key={item.id} className={`knowledge-item ${item.status}`}>
                 <div
                   className={`knowledge-title ${
                     item.status === 'weak' ? 'weak' : ''
@@ -359,8 +361,8 @@ const ReviewCenter: React.FC = () => {
                       item.status === 'mastered'
                         ? 'fas fa-check-circle'
                         : item.status === 'reviewed'
-                        ? 'fas fa-sync-alt'
-                        : 'fas fa-exclamation-circle'
+                          ? 'fas fa-sync-alt'
+                          : 'fas fa-exclamation-circle'
                     }
                   ></i>
                   <span>{item.title}</span>
@@ -373,14 +375,16 @@ const ReviewCenter: React.FC = () => {
                 <div className="knowledge-progress">
                   <div className="knowledge-progress-fill"></div>
                 </div>
-                <div className="knowledge-meta">最后复习: {item.lastReview}</div>
+                <div className="knowledge-meta">
+                  最后复习: {item.lastReview}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    </>
+  )
+}
 
-export default ReviewCenter;
+export default ReviewCenter
