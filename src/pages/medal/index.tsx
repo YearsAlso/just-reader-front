@@ -30,8 +30,7 @@ interface Level {
 }
 
 const MedalPage: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<string>('all')
-  const [activeTab, setActiveTab] = useState<string>('medal')
+  const [activeCategory, setActiveCategory] = useState<string>('all') 
 
   const medals: Medal[] = [
     {
@@ -191,11 +190,7 @@ const MedalPage: React.FC = () => {
 
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category)
-  }
-
-  const handleTabChange = (tab: string) => {
-    setActiveTab(tab)
-  }
+  } 
 
   const handleStartReading = () => {
     // 实际应用中会跳转到阅读页面
