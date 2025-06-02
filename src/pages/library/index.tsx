@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import './styles.less'
+import { useNavigate } from 'react-router-dom'
+import { message } from 'antd'
 
 interface Book {
   id: number
@@ -14,6 +16,7 @@ interface Book {
 }
 
 const Library: React.FC = () => {
+  const navigator = useNavigate()
   // 模拟图书数据
   const initialBooks: Book[] = [
     {
@@ -160,18 +163,20 @@ const Library: React.FC = () => {
 
   // 导入新书
   const handleImport = () => {
-    alert('打开导入新书界面')
+    message.info('打开导入新书界面')
+    navigator('/upload')
   }
 
   // 处理书籍点击
   const handleBookClick = (book: Book) => {
-    alert(`打开《${book.title}》的详情页面`)
+    message.info(`打开《${book.title}》的详情页面`)
   }
 
   // 处理开始阅读按钮点击
   const handleReadClick = (e: React.MouseEvent, book: Book) => {
     e.stopPropagation() // 阻止冒泡到书籍卡片
-    alert(`开始阅读《${book.title}》`)
+    message.info(`开始阅读《${book.title}》`)
+    navigator(`/bookinfo/${book.id}`)
   }
 
   // 处理页码按钮点击

@@ -2,7 +2,7 @@ import React from 'react'
 import './styles.less' // 引入样式文件
 import { Button } from 'antd'
 
-const BooksPage: React.FC = () => {
+const ReadBookPage: React.FC = () => {
   return (
     <div className="books-page-content">
       <div className="main-content">
@@ -287,4 +287,4 @@ const BooksPage: React.FC = () => {
   )
 }
 
-export default BooksPage
+export default ReadBookPage

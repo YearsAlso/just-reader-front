@@ -2,8 +2,7 @@ import {
   HashRouter as Router,
   Navigate,
   Route,
-  Routes,
-  createBrowserRouter
+  Routes, 
 } from 'react-router-dom'
 import './App.less'
 import ProtectedRoute from './components/ProtectedRoute/index.tsx'
