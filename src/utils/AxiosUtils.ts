@@ -11,7 +11,7 @@ export class AxiosUtils {
     this.axiosInstance = axios.create(config)
   }
 
-  async request<T, P = unknown>({
+  private async handleRequest<T, P = unknown>({
     url,
     method,
     params,
@@ -28,11 +28,9 @@ export class AxiosUtils {
     checkPermission?: PermissionChecker
     config?: AxiosRequestConfig
   }): Promise<AxiosResponse<T>> {
-    // 权限校验
     if (checkPermission && !(await checkPermission())) {
       throw new Error('无权限访问')
     }
-    // 参数校验
     if (schema && params) {
       schema.parse(params)
     }
@@ -42,6 +40,60 @@ export class AxiosUtils {
       params,
       data,
       ...config
+    })
+  }
+
+  get<T, P = unknown>(options: {
+    url: string
+    params?: P
+    schema?: ZodSchema<P>
+    checkPermission?: PermissionChecker
+    config?: AxiosRequestConfig
+  }): Promise<AxiosResponse<T>> {
+    return this.handleRequest<T, P>({
+      ...options,
+      method: 'get'
+    })
+  }
+
+  post<T, P = unknown>(options: {
+    url: string
+    data?: any
+    params?: P
+    schema?: ZodSchema<P>
+    checkPermission?: PermissionChecker
+    config?: AxiosRequestConfig
+  }): Promise<AxiosResponse<T>> {
+    return this.handleRequest<T, P>({
+      ...options,
+      method: 'post'
+    })
+  }
+
+  put<T, P = unknown>(options: {
+    url: string
+    data?: any
+    params?: P
+    schema?: ZodSchema<P>
+    checkPermission?: PermissionChecker
+    config?: AxiosRequestConfig
+  }): Promise<AxiosResponse<T>> {
+    return this.handleRequest<T, P>({
+      ...options,
+      method: 'put'
+    })
+  }
+
+  delete<T, P = unknown>(options: {
+    url: string
+    params?: P
+    schema?: ZodSchema<P>
+    checkPermission?: PermissionChecker
+    config?: AxiosRequestConfig
+  }): Promise<AxiosResponse<T>> {
+    return this.handleRequest<T, P>({
+      ...options,
+      method: 'delete'
     })
   }
 }
