@@ -31,7 +31,7 @@ const LoginPage: React.FC = () => {
               <div className="logo-icon">
                 <i className="fas fa-brain"></i>
               </div>
-              <div className="logo-text">AI-SQ3R</div>
+              <div className="logo-text">Just Reader</div>
             </div>
 
             <div className="slogan">

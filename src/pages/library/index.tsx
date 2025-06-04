@@ -170,13 +170,14 @@ const Library: React.FC = () => {
   // 处理书籍点击
   const handleBookClick = (book: Book) => {
     message.info(`打开《${book.title}》的详情页面`)
+    navigator(`/bookinfo/${book.id}`)
   }
 
   // 处理开始阅读按钮点击
   const handleReadClick = (e: React.MouseEvent, book: Book) => {
     e.stopPropagation() // 阻止冒泡到书籍卡片
     message.info(`开始阅读《${book.title}》`)
-    navigator(`/bookinfo/${book.id}`)
+    navigator(`/readbook/${book.id}`)
   }
 
   // 处理页码按钮点击
