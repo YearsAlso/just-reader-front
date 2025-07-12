@@ -2,18 +2,7 @@ import React, { useState } from 'react'
 import './styles.less'
 import { useNavigate } from 'react-router-dom'
 import { message } from 'antd'
-
-interface Book {
-  id: number
-  title: string
-  author: string
-  pages: number
-  chapters: number
-  terms: number
-  difficulty: 'easy' | 'medium' | 'hard'
-  coverColor: string
-  icon: string
-}
+import { Book } from './data'
 
 const Library: React.FC = () => {
   const navigator = useNavigate()
