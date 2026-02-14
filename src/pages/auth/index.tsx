@@ -1,9 +1,11 @@
 import React from 'react'
 import './style.less' // 引入样式文件
 import { Form, Input } from 'antd'
+import { useAuth } from '../../hooks/useAuth'
 
 const LoginPage: React.FC = () => {
   const form = Form.useFormInstance()
+  const { login } = useAuth()
 
   const handleLogin = () => {
     // 获取表单数据
@@ -11,10 +13,9 @@ const LoginPage: React.FC = () => {
     const password = form.getFieldValue('password')
     // 简单的验证逻辑
     if (username === 'admin' && password === 'password') {
-      // TODO: 加入真实的登录逻辑
+      // 使用新的认证系统
+      login(username, password)
       alert('Login successful!')
-      localStorage.setItem('authenticated', 'true')
-      localStorage.setItem('authToken', '1234566')
       window.location.href = '/'
     } else {
       alert('Invalid username or password')

@@ -7,6 +7,7 @@ import './global.less'
 import { setDomFontSize } from '@/utils/DomUtils'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import { AppProviders } from './providers/AppProviders'
 
 config.autoAddCss = false // 禁用自动添加CSS，避免重复引入
 
@@ -24,7 +25,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         }
       }}
     >
-      <App />
+      <AppProviders>
+        <App />
+      </AppProviders>
     </ConfigProvider>
   </React.StrictMode>
 )
