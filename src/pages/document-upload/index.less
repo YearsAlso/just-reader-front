@@ -1,0 +1,332 @@
+.document-upload-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+
+  .page-header {
+    margin-bottom: 32px;
+    padding: 24px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .ant-typography {
+      margin-bottom: 0;
+    }
+  }
+
+  .main-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .content-left {
+    .upload-card {
+      .ant-tabs {
+        .ant-tabs-nav {
+          margin-bottom: 24px;
+
+          .ant-tabs-tab {
+            padding: 12px 24px;
+            font-size: 16px;
+
+            &:hover {
+              color: #1890ff;
+            }
+
+            &.ant-tabs-tab-active {
+              .ant-tabs-tab-btn {
+                color: #1890ff;
+                font-weight: 600;
+              }
+            }
+          }
+
+          .ant-tabs-ink-bar {
+            background: #1890ff;
+          }
+        }
+      }
+
+      .coming-soon {
+        text-align: center;
+        padding: 60px 24px;
+
+        .ant-typography {
+          margin-bottom: 12px;
+        }
+      }
+    }
+
+    .ant-alert {
+      border-radius: 8px;
+
+      .ant-alert-message {
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .ant-alert-description {
+        ul {
+          padding-left: 20px;
+          margin-bottom: 0;
+
+          li {
+            margin-bottom: 4px;
+            line-height: 1.6;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .content-right {
+    .features-card,
+    .formats-card {
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+      .ant-card-head {
+        border-bottom: 2px solid #f0f0f0;
+        padding: 16px 24px;
+
+        .ant-card-head-title {
+          font-size: 18px;
+          font-weight: 600;
+          color: #1890ff;
+        }
+      }
+
+      .ant-card-body {
+        padding: 24px;
+      }
+    }
+
+    .features-card {
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+
+        @media (max-width: 768px) {
+          grid-template-columns: 1fr;
+        }
+
+        .feature-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 16px;
+          padding: 16px;
+          background: #fafafa;
+          border-radius: 8px;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background: #f0f7ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(24, 144, 255, 0.1);
+          }
+
+          .feature-icon {
+            font-size: 32px;
+            line-height: 1;
+          }
+
+          .feature-content {
+            flex: 1;
+
+            .ant-typography {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .formats-card {
+      .formats-list {
+        .format-item {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          padding: 16px;
+          border-bottom: 1px solid #f0f0f0;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          .format-badge {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: white;
+
+            &.pdf {
+              background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%);
+            }
+
+            &.epub {
+              background: linear-gradient(135deg, #1890ff 0%, #69c0ff 100%);
+            }
+
+            &.word {
+              background: linear-gradient(135deg, #52c41a 0%, #95de64 100%);
+            }
+
+            &.text {
+              background: linear-gradient(135deg, #722ed1 0%, #9254de 100%);
+            }
+          }
+
+          .format-info {
+            flex: 1;
+
+            .ant-typography {
+              display: block;
+              margin-bottom: 4px;
+
+              &:last-child {
+                margin-bottom: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .help-content {
+    .ant-typography {
+      margin-bottom: 20px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      ul {
+        padding-left: 20px;
+        margin-top: 8px;
+        margin-bottom: 0;
+
+        li {
+          margin-bottom: 4px;
+          line-height: 1.6;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  // 响应式设计
+  @media (max-width: 768px) {
+    padding: 16px;
+
+    .page-header {
+      padding: 16px;
+      margin-bottom: 24px;
+
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+
+    .content-left {
+      .upload-card {
+        .ant-tabs {
+          .ant-tabs-nav {
+            .ant-tabs-tab {
+              padding: 8px 16px;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+
+    .content-right {
+      .features-card {
+        .features-grid {
+          .feature-item {
+            padding: 12px;
+
+            .feature-icon {
+              font-size: 24px;
+            }
+          }
+        }
+      }
+
+      .formats-card {
+        .formats-list {
+          .format-item {
+            padding: 12px;
+
+            .format-badge {
+              width: 50px;
+              height: 50px;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// 模态框样式
+.ant-modal {
+  .ant-modal-content {
+    border-radius: 12px;
+
+    .ant-modal-header {
+      border-bottom: 2px solid #f0f0f0;
+      border-radius: 12px 12px 0 0;
+      padding: 24px;
+
+      .ant-modal-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #1890ff;
+      }
+    }
+
+    .ant-modal-body {
+      padding: 24px;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+
+    .ant-modal-footer {
+      border-top: 1px solid #f0f0f0;
+      padding: 16px 24px;
+      border-radius: 0 0 12px 12px;
+    }
+  }
+}

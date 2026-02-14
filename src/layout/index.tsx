@@ -12,6 +12,7 @@ import Library from '@/pages/library'
 import { message } from 'antd'
 import UploadPage from '@/pages/upload'
 import BookInfoPage from '@/pages/bookinfo'
+import DocumentUploadPage from '@/pages/document-upload'
 
 const LayoutWrapper = () => {
   const navigate = useNavigate()
@@ -103,6 +104,15 @@ const LayoutWrapper = () => {
         >
           学习挑战
         </button>
+        <button
+          className={getNavTabClass('document-upload')}
+          key={'document-upload-tab'}
+          onClick={() => {
+            handleTabClick('document-upload')
+          }}
+        >
+          文档上传
+        </button>
       </div>
       <Routes>
         <Route index element={<Library />} /> 
@@ -113,6 +123,7 @@ const LayoutWrapper = () => {
         <Route path="/study-challenge" element={<Challenge />} />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/upload" element={<UploadPage />} />
+        <Route path="/document-upload" element={<DocumentUploadPage />} />
         <Route path="/readbook/:bookId" element={<ReadBookPage />} />
         <Route path="/bookinfo/:bookId" element={<BookInfoPage />} />
       </Routes>
